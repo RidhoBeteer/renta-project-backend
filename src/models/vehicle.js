@@ -11,4 +11,18 @@ module.exports = {
         }
       });
     }),
+  getVehicleById: (id) =>
+    new Promise((resolve, reject) => {
+      connection.query(
+        `SELECT * FROM vehicles WHERE "vehicleId" = $1`,
+        [id],
+        (error, result) => {
+          if (!error) {
+            resolve(result);
+          } else {
+            reject(new Error(error));
+          }
+        }
+      );
+    }),
 };
